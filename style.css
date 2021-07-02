@@ -1,0 +1,62 @@
+body
+{
+    margin: 0px;
+    padding: 0px;
+}
+#header
+{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    
+    color: #BBCEEE;
+    font-family: cursive;
+    font-weight: bold;
+    background-color: #222132;
+    border-bottom: 3px solid red;
+}
+#currentPlayer
+{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+    background-color: #C5C3C6;
+    
+}
+#boarddiv
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #C5C3C6;
+    
+    
+}
+#gameGrid
+{
+    --dimensionGrid: 600px;
+    
+    height: var(--dimensionGrid);
+    width: var(--dimensionGrid);
+    
+    background-color: black;
+    
+    padding: 0px;
+    display: grid;
+    gap: 2px;
+    
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+.cell
+{
+    background-color: plum;
+}
