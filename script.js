@@ -94,6 +94,24 @@ const player = (name, char) => {
 const displayManager = (() => {
     
     let resdiv = document.getElementById('result');
+    let currPlayer = document.getElementById("pname");
+    let modal = document.getElementById('myModal');
+    let restartbtn = document.getElementById("modalbtn");
+    
+    let refreshContent = () => {
+        
+        currPlayer.textContent = "X";
+        modal.style.display = "none";
+        gameBoard.resetArr();
+        for(let i=0;i<9;i++)
+        {
+            let temp = document.getElementById('cell'+i);
+            temp.textContent = '';
+        }
+        control.p1turn = true;
+    }
+    
+    restartbtn.addEventListener('click', refreshContent);
     
     let playerAction = (Event) => {
         
@@ -115,10 +133,14 @@ const displayManager = (() => {
         if(control.p1turn === true)
         {
             cell.textContent = "X";
+            currPlayer.textContent = "O";
+            
         }
         else
         {
             cell.textContent = "O";    
+            currPlayer.textContent = "X";
+            
         }
         
         control.p1turn = (control.p1turn === true)?false:true;
@@ -127,35 +149,26 @@ const displayManager = (() => {
         
         if(retval === 'X')
         {
-            resdiv.textContent = "X";
-            refreshContent(retval);
+            debugger;
+            resdiv.textContent = "X Won!";
+            modal.style.display = "flex";
         }
         else if(retval === 'O')
         {
-            resdiv.textContent = "O";
-            refreshContent(retval);
+            resdiv.textContent = "O Won!";
+            modal.style.display = "flex";
             
         }
         else if(retval === 'draw')
         {
-            resdiv.textContent = "draw";
-            refreshContent(retval);
+            resdiv.textContent = "Its a Draw";
+            modal.style.display = "flex";
         }
         
         
         
     }
-    let refreshContent = () => {
-        
-        gameBoard.resetArr();
-        for(let i=0;i<9;i++)
-        {
-            let temp = document.getElementById('cell'+i);
-            temp.textContent = '';
-        }
-        control.p1turn = true;
-    }
-    return {playerAction,}
+    return {playerAction, modal, refreshContent,}
     
 })()
 
@@ -190,3 +203,9 @@ const control = (() => {
 // console.log(gameBoard.arr);
 
 
+window.onclick = () => {
+    if(Event.target == displayManager.modal)
+    {
+        displayManager.refreshContent();
+    }
+}
